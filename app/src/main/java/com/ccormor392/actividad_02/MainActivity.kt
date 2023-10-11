@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
@@ -58,12 +59,42 @@ class MainActivity : AppCompatActivity() {
             botonOp.setOnClickListener { listenerOperaciones(botonOp) }
         }
         igual.setOnClickListener { listenerIgual() }
+        botonCE.setOnClickListener { listenerBotonCE() }
     }
     fun listenerNumeros(boton:Button){
         if (esOperacion(getTextViewText(texto))){
             texto.text=""
         }
        texto.text ="${texto.text}${boton.text}"
+    }
+    fun listenerOperaciones(boton: Button){
+        if (!esOperacion(getTextViewText(texto))) {
+            if (calc.esPrimeraOperacion) {
+                calc.num1 = getTextViewText(texto).toFloat()
+                calc.esPrimeraOperacion = false
+            } else {
+                calc.num2 = getTextViewText(texto).toFloat()
+                calc.operar()
+                calc.num1 = calc.resultado
+            }
+        }
+        calc.operacion = getButtonText(boton)
+        texto.text = boton.text
+    }
+    fun listenerIgual(){
+        if (calc.operacionIncompleta())
+            Toast.makeText(this, "Introduce el operando y dos numeros antes de pulsar igual", Toast.LENGTH_SHORT).show()
+        else if (!esOperacion(getTextViewText(texto))){
+            calc.num2 = getTextViewText(texto).toFloat()
+            calc.operar()
+            texto.text = calc.resultado.toString()
+            //prueba
+            calc.reset()
+        }
+    }
+    fun listenerBotonCE(){
+        calc.reset() //reinicio todos los atributos del objeto calc
+        texto.text = "" //borro lo que haya en la pantalla
     }
     fun esOperacion(string: String):Boolean{
         for (operacion in operaciones) {
@@ -79,16 +110,5 @@ class MainActivity : AppCompatActivity() {
     fun getTextViewText(texto:TextView):String{
         return texto.text.toString()
     }
-    fun listenerOperaciones(boton: Button){
-        calc.num1 = getTextViewText(texto).toFloat()
-        texto.text = boton.text
-        calc.operacion = getButtonText(boton)
-    }
-    fun listenerIgual(){
-        if (!esOperacion(getTextViewText(texto))){
-            calc.num2 = getTextViewText(texto).toFloat()
-            calc.operar()
-            texto.text = calc.resultado.toString()
-        }
-    }
+
 }
