@@ -1,21 +1,35 @@
 package com.ccormor392.actividad_02
 
 class Calculo {
-    var num1 = 0
-    var num2 = 0
+    var num1 = 0f
+    var num2 = 0f
     var operacion = ""
-    var resultado = 0
-    fun sumar(): Int {
+    var resultado = 0f
+    fun sumar(): Float {
         return num1 + num2
     }
-    fun multiplicar(): Int {
+    fun multiplicar(): Float {
         return num1 * num2
     }
-    fun dividir(): Int {
+    fun dividir(): Float {
         return num1 / num2
     }
-    fun restar(): Int {
+    fun restar(): Float {
         return num1 - num2
+    }
+    fun operar(){
+        when(operacion){
+            "÷" -> resultado = dividir()
+            "+" -> resultado = sumar()
+            "-" -> resultado = restar()
+            "×" -> resultado = multiplicar()
+        }
+    }
+    fun reset(){
+        num1 = 0f
+        num2 = 0f
+        operacion = ""
+        resultado = 0f
     }
 
 }

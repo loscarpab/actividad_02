@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var operaciones:MutableList<Button>
     lateinit var botonCE: Button
     lateinit var texto: TextView
+    lateinit var igual:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         operaciones = crearListaOperaciones()
         botonCE = findViewById(R.id.ce)
         texto = findViewById(R.id.textNumbers)
+        igual = findViewById(R.id.equal)
     }
 
     fun crearListaNumeros():MutableList<Button>{
@@ -49,11 +51,44 @@ class MainActivity : AppCompatActivity() {
         return listButtons
     }
     fun initListeners(){
-        for (boton in numeros){
-            boton.setOnClickListener { listenerNumeros(boton) }
+        for (botonNum in numeros){
+            botonNum.setOnClickListener { listenerNumeros(botonNum) }
         }
+        for (botonOp in operaciones){
+            botonOp.setOnClickListener { listenerOperaciones(botonOp) }
+        }
+        igual.setOnClickListener { listenerIgual() }
     }
     fun listenerNumeros(boton:Button){
+        if (esOperacion(getTextViewText(texto))){
+            texto.text=""
+        }
+       texto.text ="${texto.text}${boton.text}"
+    }
+    fun esOperacion(string: String):Boolean{
+        for (operacion in operaciones) {
+            if (string == operacion.text){
+                return true
+            }
+        }
+        return false
+    }
+    fun getButtonText(boton: Button):String{
+        return boton.text.toString()
+    }
+    fun getTextViewText(texto:TextView):String{
+        return texto.text.toString()
+    }
+    fun listenerOperaciones(boton: Button){
+        calc.num1 = getTextViewText(texto).toFloat()
         texto.text = boton.text
+        calc.operacion = getButtonText(boton)
+    }
+    fun listenerIgual(){
+        if (!esOperacion(getTextViewText(texto))){
+            calc.num2 = getTextViewText(texto).toFloat()
+            calc.operar()
+            texto.text = calc.resultado.toString()
+        }
     }
 }

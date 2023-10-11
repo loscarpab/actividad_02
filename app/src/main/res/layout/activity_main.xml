@@ -10,7 +10,7 @@
         android:id="@+id/textNumbers"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="hello world"
+        android:text=""
         android:textAlignment="textEnd"
         android:gravity="bottom"
         android:background="@drawable/border"
