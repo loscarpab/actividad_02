@@ -5,7 +5,7 @@ class Calculo {
     var num2 = 0f
     var operacion = ""
     var resultado = 0f
-    var esPrimeraOperacion = true
+    var esperandoA = "num1"
     fun sumar(): Float {
         return num1 + num2
     }
@@ -31,10 +31,8 @@ class Calculo {
         num2 = 0f
         operacion = ""
         resultado = 0f
-        esPrimeraOperacion = true
+        esperandoA = "num1"
     }
-    fun operacionIncompleta():Boolean{
-        return (num2 == 0f && operacion == "")
-    }
+
 
 }

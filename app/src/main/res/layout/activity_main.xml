@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:text=""
-        android:textAlignment="textEnd"
+            android:gravity="end|bottom"
         android:textSize="30sp"
         />
         <TextView
@@ -30,8 +30,9 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:text=""
-            android:textAlignment="textEnd"
-            android:textSize="30sp" />
+            android:gravity="end|bottom"
+            android:textSize="60sp"
+            android:textColor="@color/black"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/allButtons"
