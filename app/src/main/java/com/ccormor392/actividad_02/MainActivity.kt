@@ -90,50 +90,41 @@ class MainActivity : AppCompatActivity() {
         if (esOperacion(getTextViewText(mainTexto))){
             mainTexto.text=""
         }//si el textView tiene una operacion la borra
-        mainTexto.text ="${mainTexto.text}${boton.text}"//concatena los numeros al textView
+        concatenarTextoATextView(mainTexto, boton.text.toString())//concatena los numeros al textView
         concatenarTextoATextView(secondTexto, boton.text.toString())
     }
+
+    /**
+     * Refleja en los dos TextView la operacion pulsada, modifica el atributo operacion de la clase calc por la operacion pulsada
+     * y si es necesario realiza la operacion
+     * @param boton el boton pulsado con la operacion
+     */
     fun listenerOperaciones(boton: Button){
         if (!esOperacion(getTextViewText(mainTexto))) {
-            if (calc.esperandoA == "num1") {
+            if (calc.esperandoA == "num1") {// si es la primera vez que se pulsa un boton de operacion
                 calc.num1 = getTextViewText(mainTexto).toFloat()
-                secondTexto.text = "${calc.num1}${boton.text}"
                 mainTexto.text = boton.text
                 calc.esperandoA = "num2"
-            } else if (calc.esperandoA == "num2") {
+            } else if (calc.esperandoA == "num2") { //si ya se ha pulsado antes algun boton de operacion
                 calc.num2 = getTextViewText(mainTexto).toFloat()
                 calc.operar()
                 calc.num1 = calc.resultado
                 calc.num2 = 0f
-                secondTexto.text = "${calc.num1}${boton.text}"
                 mainTexto.text = boton.text
             }
         }
-        else{
+        else{// si el ultimo boton pulsado es una operacion, si pulsas otra operacion se sustituye por la nueva pulsada
             mainTexto.text = boton.text
-            secondTexto.text = "${calc.num1}${boton.text}"
+
         }
         calc.operacion = getButtonText(boton)
-
-        /*
-        if (calc.esPrimeraOperacion) {
-            calc.num1 = getTextViewText(mainTexto).toFloat()
-            secondTexto.text = "${secondTexto.text}${boton.text}"
-            calc.esPrimeraOperacion = false
-            mainTexto.text = boton.text
-        } else {
-            calc.num2 = getTextViewText(mainTexto).toFloat()
-            calc.operar()
-            calc.num1 = calc.resultado
-            calc.num2 = 0f
-            secondTexto.text = "${calc.num1}${boton.text}"
-            mainTexto.text = boton.text
-        }
-         */
-
-
-
+        secondTexto.text = "${calc.num1}${boton.text}"
     }
+
+    /**
+     * Realiza la operacion correspondiente dentro de la clase Calculo y la refleja por pantalla
+     *
+     */
     fun listenerIgual(){
         if (esOperacion(getTextViewText(mainTexto))||getTextViewText(mainTexto)==""||calc.operacion=="")
             Toast.makeText(this, "Introduce el operando y dos numeros antes de pulsar igual", Toast.LENGTH_SHORT).show()
@@ -143,15 +134,22 @@ class MainActivity : AppCompatActivity() {
             concatenarTextoATextView(secondTexto, "=")
             mainTexto.text = calc.resultado.toString()
             concatenarTextoATextView(secondTexto, calc.resultado.toString())
-            //prueba
             calc.reset()
         }
     }
+
+    /**
+     * reinicio de todas las variables de la clase Calculo y de los TextView
+     */
     fun listenerBotonCE(){
         calc.reset() //reinicio todos los atributos del objeto calc
         mainTexto.text = ""
         secondTexto.text = "" //borro lo que haya en la pantalla
     }
+
+    /**
+     * Detecta si el string es una operacion o no
+     */
     fun esOperacion(string: String):Boolean{
         for (operacion in operaciones) {
             if (string == operacion.text){
@@ -160,12 +158,24 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
+
+    /**
+     * devuelve el texto de un boton
+     */
     fun getButtonText(boton: Button):String{
         return boton.text.toString()
     }
+
+    /**
+     * devuelve el texto de un TextView
+     */
     fun getTextViewText(texto:TextView):String{
         return texto.text.toString()
     }
+
+    /**
+     * concatena un string al texto de un TextView
+     */
     fun concatenarTextoATextView(texto: TextView, string: String){
         texto.text = "${texto.text}${string}"
     }

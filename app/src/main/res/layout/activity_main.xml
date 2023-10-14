@@ -44,43 +44,6 @@
         android:orientation="vertical"
         >
         <LinearLayout
-            android:id="@+id/firstRow"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/ce"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="CE"
-                android:autoSizeTextType="uniform"
-                style="" />
-            <Button
-                android:id="@+id/delete"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:text="del"
-                android:layout_height="match_parent"
-                android:autoSizeTextType="uniform"/>
-            <Button
-                android:id="@+id/divisionentera"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="%"
-                android:autoSizeTextType="uniform"
-                />
-            <Button
-                android:id="@+id/divide"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="÷"
-                android:autoSizeTextType="uniform"/>
-        </LinearLayout>
-        <LinearLayout
             android:id="@+id/secondRow"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -195,22 +158,19 @@
             android:layout_weight="1"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/ce"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:text="CE"
+                android:autoSizeTextType="uniform"
+                style="" />
             <Button
                 android:id="@+id/zero"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="0"
-                android:autoSizeTextType="uniform"/>
-            <Button
-                android:id="@+id/point"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="."
                 android:autoSizeTextType="uniform"/>
             <Button
                 android:id="@+id/equal"
@@ -220,6 +180,13 @@
                 android:text="="
                 android:textAlignment="center"
                 android:autoSizeTextType="uniform" />
+            <Button
+                android:id="@+id/divide"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="÷"
+                android:autoSizeTextType="uniform"/>
         </LinearLayout>
     </LinearLayout>
 
